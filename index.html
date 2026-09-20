@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Vaishu</title>
+
+<!-- Fonts: a script face for the big headline, a soft rounded sans for everything else -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ============ EDIT ZONE ============
+     Want to change the name or message? Look for the text
+     inside the HTML further down (search for "Vaishu" or
+     "EDIT HERE") and just type over it in Notepad. Saving
+     the file and reopening it in a browser is all you need.
+     ==================================== */
+
+  :root{
+    --rose-deep:   #7a2039;
+    --rose-mid:    #b23a56;
+    --rose-soft:   #f6c9d3;
+    --blush:       #fdeef1;
+    --cream:       #fff8f4;
+    --gold:        #d9a441;
+    --ink:         #3a1420;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html,body{
+    height:100%;
+    font-family:'Quicksand', sans-serif;
+    color:var(--ink);
+    overflow-x:hidden;
+  }
+
+  body{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+      radial-gradient(circle at 20% 20%, var(--blush) 0%, transparent 45%),
+      radial-gradient(circle at 80% 75%, var(--rose-soft) 0%, transparent 50%),
+      linear-gradient(160deg, var(--cream) 0%, var(--blush) 45%, var(--rose-soft) 100%);
+    position:relative;
+    padding:40px 20px;
+  }
+
+  /* ---------- Floating heart background ---------- */
+  .heart-field{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:0;
+  }
+
+  .heart{
+    position:absolute;
+    bottom:-10%;
+    opacity:0;
+    color:var(--rose-mid);
+    animation:floatUp linear infinite;
+  }
+
+  .heart svg{ width:100%; height:100%; display:block; }
+
+  @keyframes floatUp{
+    0%{
+      transform:translateY(0) translateX(0) rotate(0deg) scale(var(--s,1));
+      opacity:0;
+    }
+    8%{ opacity:.55; }
+    92%{ opacity:.45; }
+    100%{
+      transform:translateY(-115vh) translateX(var(--drift,20px)) rotate(var(--spin,25deg)) scale(var(--s,1));
+      opacity:0;
+    }
+  }
+
+  /* ---------- Card ---------- */
+  .card{
+    position:relative;
+    z-index:1;
+    max-width:640px;
+    width:100%;
+    text-align:center;
+    padding:64px 44px 52px;
+    background:rgba(255,255,255,0.62);
+    border:1px solid rgba(255,255,255,0.8);
+    border-radius:28px;
+    backdrop-filter:blur(6px);
+    box-shadow:0 30px 60px -25px rgba(122,32,57,0.35);
+  }
+
+  .kicker{
+    font-size:15px;
+    letter-spacing:0.06em;
+    color:var(--rose-mid);
+    margin-bottom:6px;
+  }
+
+  h1.headline{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:clamp(34px, 6vw, 52px);
+    color:var(--rose-deep);
+    line-height:1.15;
+    margin-bottom:4px;
+  }
+
+  h2.name{
+    font-family:'Playfair Display', serif;
+    font-weight:600;
+    font-size:clamp(48px, 10vw, 84px);
+    color:var(--rose-mid);
+    letter-spacing:0.01em;
+    margin:6px 0 26px;
+    position:relative;
+    display:inline-block;
+  }
+
+  h2.name::after{
+    content:"";
+    display:block;
+    width:70px;
+    height:3px;
+    margin:14px auto 0;
+    background:var(--gold);
+    border-radius:2px;
+  }
+
+  p.message{
+    font-size:18px;
+    line-height:1.75;
+    color:var(--ink);
+    max-width:480px;
+    margin:0 auto 30px;
+  }
+
+  /* ---------- Wish list ---------- */
+  .wishes{
+    list-style:none;
+    text-align:left;
+    max-width:420px;
+    margin:0 auto 32px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .wishes li{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:16px;
+    line-height:1.5;
+    color:var(--ink);
+  }
+
+  .wishes li::before{
+    content:"❤";
+    color:var(--rose-mid);
+    font-size:14px;
+    margin-top:3px;
+    flex:none;
+  }
+
+  .cake-row{
+    font-size:34px;
+    letter-spacing:14px;
+    margin-bottom:18px;
+  }
+
+  /* ---------- Make-a-wish button ---------- */
+  .wish-btn{
+    font-family:'Quicksand', sans-serif;
+    font-weight:600;
+    font-size:15px;
+    color:#fff;
+    background:var(--rose-mid);
+    border:none;
+    padding:13px 30px;
+    border-radius:999px;
+    cursor:pointer;
+    box-shadow:0 12px 24px -10px rgba(178,58,86,0.55);
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+    margin-bottom:8px;
+  }
+
+  .wish-btn:hover{
+    transform:translateY(-2px);
+    background:var(--rose-deep);
+    box-shadow:0 16px 28px -10px rgba(122,32,57,0.55);
+  }
+
+  .wish-btn:active{ transform:translateY(0); }
+
+  .wish-hint{
+    font-size:13px;
+    color:var(--rose-mid);
+    opacity:.75;
+    margin-bottom:28px;
+  }
+
+  /* ---------- Burst hearts (triggered by the button) ---------- */
+  .burst-field{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:2;
+  }
+
+  .burst-heart{
+    position:absolute;
+    color:var(--rose-mid);
+    animation:burstUp 1.6s ease-out forwards;
+  }
+
+  .burst-heart svg{ width:100%; height:100%; display:block; }
+
+  @keyframes burstUp{
+    0%{ transform:translateY(0) scale(0.4); opacity:0; }
+    15%{ opacity:1; }
+    100%{ transform:translateY(-260px) translateX(var(--bx,0px)) scale(var(--bs,1)); opacity:0; }
+  }
+
+  .signature{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-size:20px;
+    color:var(--rose-deep);
+    padding-top:22px;
+    border-top:1px solid rgba(122,32,57,0.18);
+  }
+
+  .signature .heart-mark{
+    color:var(--rose-mid);
+  }
+
+  @media (max-width:480px){
+    .card{ padding:46px 24px 38px; border-radius:20px; }
+    .cake-row{ letter-spacing:8px; font-size:28px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Decorative floating hearts, generated once, purely visual -->
+  <div class="heart-field" id="heartField"></div>
+
+  <main class="card">
+    <p class="kicker">a little something for you</p>
+
+    <h1 class="headline">Happy Birthday</h1>
+    <!-- EDIT HERE: change the name below -->
+    <h2 class="name">Vaishu</h2>
+
+    <!-- EDIT HERE: change the birthday message below -->
+    <p class="message">
+      Wishing you a day as warm and lovely as you are. May this year bring
+      you more laughter, more little joys, and more reasons to smile than
+      the one before it. Here's to celebrating you today &mdash; and always.
+    </p>
+
+    <!-- EDIT HERE: change, add, or remove wish lines below -->
+    <ul class="wishes">
+      <li>A year full of little wins and big celebrations</li>
+      <li>Endless good food, good music, and better memories</li>
+      <li>People around you who make ordinary days feel special</li>
+      <li>Health, peace, and a heart as happy as it makes others</li>
+    </ul>
+
+    <div class="cake-row" aria-hidden="true">🎂 🎈 🎉</div>
+
+    <button class="wish-btn" id="wishBtn" type="button">Make a wish 🕯️</button>
+    <p class="wish-hint">tap the button</p>
+
+    <p class="signature">Happy birthday from Zeni <span class="heart-mark">❤</span></p>
+  </main>
+
+  <!-- Hearts burst here when the wish button is tapped -->
+  <div class="burst-field" id="burstField"></div>
+
+<script>
+  // Purely decorative: scatters a handful of drifting hearts across the
+  // background and lets a CSS animation carry them upward on a loop.
+  (function(){
+    var field = document.getElementById('heartField');
+    var HEART_COUNT = 18;
+
+    function heartSVG(){
+      return '<svg viewBox="0 0 32 29" xmlns="http://www.w3.org/2000/svg">' +
+             '<path fill="currentColor" d="M16 29 C6 21 0 15 0 8.5 0 3.8 3.8 0 8.5 0 ' +
+             'c2.7 0 5.2 1.3 6.8 3.4 C16.9 1.3 19.4 0 22.1 0 26.8 0 30.6 3.8 ' +
+             '30.6 8.5 30.6 15 24.6 21 16 29 Z"/></svg>';
+    }
+
+    for (var i = 0; i < HEART_COUNT; i++){
+      var el = document.createElement('div');
+      el.className = 'heart';
+      el.innerHTML = heartSVG();
+
+      var size = 12 + Math.random() * 22;
+      var left = Math.random() * 100;
+      var duration = 10 + Math.random() * 12;
+      var delay = Math.random() * 14;
+      var drift = (Math.random() * 120 - 60).toFixed(0) + 'px';
+      var spin = (Math.random() * 60 - 30).toFixed(0) + 'deg';
+
+      el.style.width = size + 'px';
+      el.style.height = size + 'px';
+      el.style.left = left + '%';
+      el.style.animationDuration = duration + 's';
+      el.style.animationDelay = delay + 's';
+      el.style.setProperty('--drift', drift);
+      el.style.setProperty('--spin', spin);
+      el.style.setProperty('--s', (0.8 + Math.random() * 0.6).toFixed(2));
+
+      field.appendChild(el);
+    }
+  })();
+
+  // Heart burst when the "Make a wish" button is tapped.
+  (function(){
+    var btn = document.getElementById('wishBtn');
+    var burstField = document.getElementById('burstField');
+    if (!btn) return;
+
+    function heartSVG(){
+      return '<svg viewBox="0 0 32 29" xmlns="http://www.w3.org/2000/svg">' +
+             '<path fill="currentColor" d="M16 29 C6 21 0 15 0 8.5 0 3.8 3.8 0 8.5 0 ' +
+             'c2.7 0 5.2 1.3 6.8 3.4 C16.9 1.3 19.4 0 22.1 0 26.8 0 30.6 3.8 ' +
+             '30.6 8.5 30.6 15 24.6 21 16 29 Z"/></svg>';
+    }
+
+    btn.addEventListener('click', function(){
+      var rect = btn.getBoundingClientRect();
+      var originX = rect.left + rect.width / 2;
+      var originY = rect.top;
+
+      for (var i = 0; i < 16; i++){
+        var el = document.createElement('div');
+        el.className = 'burst-heart';
+        el.innerHTML = heartSVG();
+
+        var size = 10 + Math.random() * 16;
+        var bx = (Math.random() * 200 - 100).toFixed(0) + 'px';
+        var bs = (0.6 + Math.random() * 0.8).toFixed(2);
+        var delay = (Math.random() * 0.25).toFixed(2) + 's';
+
+        el.style.width = size + 'px';
+        el.style.height = size + 'px';
+        el.style.left = (originX - size / 2 + (Math.random() * 60 - 30)) + 'px';
+        el.style.top = originY + 'px';
+        el.style.animationDelay = delay;
+        el.style.setProperty('--bx', bx);
+        el.style.setProperty('--bs', bs);
+
+        burstField.appendChild(el);
+        (function(node){
+          setTimeout(function(){ node.remove(); }, 2200);
+        })(el);
+      }
+
+      btn.textContent = 'Wish sent ✨';
+      setTimeout(function(){ btn.textContent = 'Make a wish 🕯️'; }, 2000);
+    });
+  })();
+</script>
+
+</body>
+</html>
